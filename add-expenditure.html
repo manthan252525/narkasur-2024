@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expenditure</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .back {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Add Expenditure</h1>
+
+    <form id="expenseForm">
+        <label for="expenseItem">Expenditure Item</label>
+        <input type="text" id="expenseItem" name="expenseItem" required>
+
+        <label for="expenseAmount">Amount</label>
+        <input type="number" id="expenseAmount" name="expenseAmount" required>
+
+        <label for="expenseDate">Date</label>
+        <input type="date" id="expenseDate" name="expenseDate" required>
+
+        <button type="submit">ADD EXPENDITURE</button>
+    </form>
+
+    <div class="back">
+        <a href="index.html">Back to narkasur 2024</a>
+    </div>
+
+    <script>
+        document.getElementById('expenseForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const expenseItem = document.getElementById('expenseItem').value;
+            const expenseAmount = parseFloat(document.getElementById('expenseAmount').value);
+            const expenseDate = document.getElementById('expenseDate').value;
+
+            // Retrieve existing expenses from localStorage
+            let expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+
+            // Add new expense
+            expenses.push({ date: expenseDate, item: expenseItem, amount: expenseAmount });
+
+            // Save back to localStorage
+            localStorage.setItem('expenses', JSON.stringify(expenses));
+
+            // Redirect to main page or show a message
+            alert('Expenditure added successfully!');
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>
